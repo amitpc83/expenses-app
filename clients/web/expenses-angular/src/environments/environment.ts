@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://expenses-dev-api-hph6hteyhgdpc3gz.canadacentral-01.azurewebsites.net/api/',
+  apiUrl: 'expenses-api-bff6cpe2fmape8bn.canadacentral-01.azurewebsites.net/api/',
 };
