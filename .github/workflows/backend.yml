@@ -42,5 +42,5 @@ jobs:
       - name: Deploy to App Service
         uses: azure/webapps-deploy@v2
         with:
-          app-name: "<YOUR_APP_SERVICE_NAME>"
+          app-name: ${{ vars.APP_SERVICE_NAME }}
           package: published
