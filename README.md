@@ -34,6 +34,4 @@ Make sure the frontend is configured to call the backend API (e.g. https://local
 
 
 
-## Notes
-
 Make sure the frontend is configured to call the backend API (e.g. https://localhost:5001/api).
