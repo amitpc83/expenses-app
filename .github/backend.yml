@@ -1,0 +1,41 @@
+name: Deploy .NET API to Azure App Service
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore backend/Expenses.Api
+
+      - name: Build
+        run: dotnet build backend/Expenses.Api --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish backend/Expenses.Api -c Release -o published
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy to App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "<YOUR_APP_SERVICE_NAME>"
+          package: published
